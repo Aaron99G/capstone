@@ -3,19 +3,32 @@
 
 {% block content %}
 
-<h1 align="center">Calories</h1>
+<h1 align="center">Calories</h1> 
+<div class="kals" align="center">
+  {%if food %}
+    <p>{{food}}</p>
+  {%else %}
+    <p>0</p>
+  {% endif %}
+</div>
+
 <div class="entry" align="center">
   <ul class="calories" id="cals">
-    {% for food in user.foods %}
-      <li class="list-group-item">
-        {{ food.data }}
-        <button type="button" class="close" onClick="deleteFood({{ food.id }})">
-        <span aria-hidden="true">&times;</span>
-        </button>
-      </li>
-    {% endfor %}
+      {% for food in user.foods %}
+      <li class="food-item">
+          {{ food.data }} <p>|</p>
+          <p>Calories: </p> {{ food.calories }} <p>|</p>
+          <p>Protein: </p> {{ food.protein }}  <p>|</p>
+          <p>Carbs: </p> {{ food.carbs }}  <p>|</p>
+          <p>Fats: </p> {{ food.fats }}  
+          <button type="button" class="close" onClick="deleteFood({{ food.id }})">
+          <span aria-hidden="true">&times;</span>
+          </button>
+        </li>
+      {% endfor %}
   </ul>
 </div>
+
 <div align="center">
   <form method="POST">
     <textarea name="food" id="food" class="form-control" align="center"></textarea>
