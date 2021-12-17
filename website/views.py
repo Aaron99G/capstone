@@ -42,19 +42,18 @@ def home():
         carbs = food_search['hits'][0]['fields']['nf_total_carbohydrate']
         calories = food_search['hits'][0]['fields']['nf_calories']
         
+        total_score = db.session.query(db.func.sum(Food.calories)).scalar()
+        
         new_food = Food(data=food, user_id=current_user.id, calories=calories,
                         protein=proteins, carbs=carbs, fats=fats, total_cals =+ calories)
-        total_kals = 0 + calories
         db.session.add(new_food)
-        db.session.execute("""insert into food(total_cals) select sum(calories)
-            from food """)
         db.session.commit()
         flash('Food added!', category='success')
 
-        return render_template("home.html", user=current_user, food=total_kals)
+        return render_template("home.html", user=current_user,  food=total_score)
 
     else:
-        return render_template("home.html", user=current_user, food=0)
+        return render_template("home.html", user=current_user)
 
 
 @views.route('/delete-food', methods=['GET', 'POST'])
@@ -71,4 +70,5 @@ def delete_food():
 
 @views.route('/history', methods=['GET', 'POST'])
 def history():
-    return render_template("history.html")
+    return render_template("history.html", user=current_user)
+

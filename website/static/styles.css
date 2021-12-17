@@ -24,9 +24,14 @@ body {
     color: black;
 }
 
+.navbar-right {
+    float: right;
+}
+
 .form-group {
     align-content: center;
     text-align: center;
+    width: 100%;
 }
 
 ul {
@@ -78,4 +83,28 @@ select {
 
 .btn[type=submit]:hover {
     background-color: #cf732c;
+}
+
+.days {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 75%;
+}
+
+.days tr,
+.days th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.days th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #cc9021;
+    color: white;
+}
+
+#days-top {
+    background-color: brown;
 }
